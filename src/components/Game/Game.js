@@ -19,7 +19,7 @@ function Game() {
 
   return (
     <>
-      <GuessTracker guessTrack={guessTrack} />
+      <GuessTracker guessTrack={guessTrack} answer={answer} />
       <GuessInput handleGuessSubmission={handleGuessSubmission} />
     </>
   );
