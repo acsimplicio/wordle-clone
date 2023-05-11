@@ -14,36 +14,28 @@ console.info({ answer });
 
 function Game() {
   const [guessTrack, setGuessTrack] = React.useState([]);
-  const [endResult, setEndResult] = React.useState({finish: false, win: false, tries: 0});
+  const [endResult, setEndResult] = React.useState('running');
 
   const handleGuessSubmission = (newGuess) => {
     const newGuessTrack = [...guessTrack, newGuess]
     setGuessTrack(newGuessTrack);
-    
+
     if (newGuess === answer) {
-      setEndResult({
-        finish: true,
-        win: true,
-        tries: newGuessTrack.length
-      });
+      setEndResult(`won`);
     }
 
     if (newGuessTrack.length >= NUM_OF_GUESSES_ALLOWED) {
-      setEndResult({
-        finish: true,
-        win: false,
-        tries: guessTrack.length
-      });
+      setEndResult('lost');
     }
   };
 
   return (
     <>
-      {endResult.finish &&
-        <Banner endResult={endResult} answer={answer} />
+      {endResult !== 'running' &&
+        <Banner endResult={endResult} tries={guessTrack.length} answer={answer} />
       }
       <GuessTracker guessTrack={guessTrack} answer={answer} />
-      <GuessInput handleGuessSubmission={handleGuessSubmission} finished={endResult.finish} />
+      <GuessInput handleGuessSubmission={handleGuessSubmission} finished={endResult !== 'running'} />
     </>
   );
 }
