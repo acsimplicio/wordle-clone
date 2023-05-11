@@ -19,6 +19,7 @@ function Game() {
   const handleGuessSubmission = (newGuess) => {
     const newGuessTrack = [...guessTrack, newGuess]
     setGuessTrack(newGuessTrack);
+    
     if (newGuess === answer) {
       setEndResult({
         finish: true,
